@@ -1,4 +1,4 @@
-#"Preamble"
+#Before starting
 You MUST install SpiralSpy to use this! Pasting the binary (.dat) file in will not work!
 SpiralSpy can be downloaded at http://spiral.onyxbits.de/download/
 
@@ -10,7 +10,7 @@ Third, click the "Edit" button at the top left of the window. It should be next 
 Fourth, CHECK THE MODEL TYPE! (It'll be at the top of the window that pops up)
 If the model is...
 ...Articulated: You're good to go!
-...Anything else: Won't work. Sorry!
+...Anything else: Chances of functionality are VERY slim. Sorry!
 
 Go to File > Export to XML...
 Save that to your desktop.
