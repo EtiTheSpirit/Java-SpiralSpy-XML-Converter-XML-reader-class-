@@ -1,4 +1,6 @@
-package start;
+package main;
+
+import java.io.IOException;
 
 public class HandleTableData {
 	static String obj = "#Brought to you by Brent \"XanthicDragon\" Duanne\n\ng Model\n\n";
@@ -16,7 +18,7 @@ public class HandleTableData {
 		return count;
 	}
 	
-	public static String ConvertToOBJ(double[][] triangles, int[] indices) {
+	public static String ConvertToOBJ(double[][] triangles, int[] indices) throws IOException {
 		int indLen = indices.length;
 		for (int i = 0; i < triangles.length; i++) {
 			if (i < indLen) {
@@ -78,13 +80,23 @@ public class HandleTableData {
 			}
 		}
 		obj = obj + "\nusemtl none\n\n";
-		int TC = count(obj, "v");
-		for (int i = 0; i <= TC; i++) {
-			if (i % 3 == 0 && i > 0) {
-				int a = i-2;
-				int b = i-1;
-				int c = i-0;
-				obj = obj + "f "+a+" "+b+" "+c+"\n";
+		HandleIndicesGraphics graphics = new HandleIndicesGraphics();
+		int[][] texC = graphics.PngGet();
+		if (texC != null) {
+			int TC = count(obj, "v");
+			int x = 1;
+			int y = 1;
+			for (int i = 0; i <= TC; i++) {
+				if (i % 3 == 0 && i > 0) {
+					int a = i-2;
+					int b = i-1;
+					int c = i-0;
+					if (i < texC.length) {
+						x = texC[i][0];
+						y = texC[i][1];
+					}
+					obj = obj + "f "+a+"/"+x+" "+b+"/"+y+" "+c+"/1\n";
+				}
 			}
 		}
 		return obj;
