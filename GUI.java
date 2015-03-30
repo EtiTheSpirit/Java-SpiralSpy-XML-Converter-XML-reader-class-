@@ -1,5 +1,4 @@
-
-package start;
+package main;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -22,7 +21,7 @@ public class GUI extends JFrame {
     	HandleTableData handle = new HandleTableData();
     	double[][] triangles = reader.getTriangles(xtxt);
     	int[] indices = reader.getIndices(xtxt);
-    	if (triangles != null && indices != null) {
+    	if (triangles != null && indices != null && triangles.length > 0 && indices.length > 0) {
     		return handle.ConvertToOBJ(triangles, indices);
     	} else {
     		return "Unexpected error during conversion. :(";
