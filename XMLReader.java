@@ -1,13 +1,11 @@
-package start;
+package main;
 
 import java.io.StringReader;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 
 public class XMLReader {
@@ -45,7 +43,7 @@ public class XMLReader {
             		String[] INX = index.split(", ");
             		for (int j = 0; j < indList.getLength(); j++) {
             			String IND = INX[j];
-            			indices[i] = Integer.parseInt(IND)-1;
+            			indices[i] = Integer.parseInt(IND)+1;
             		}
             	}
             }
@@ -53,6 +51,23 @@ public class XMLReader {
         	System.out.println("Unexpected error while getting indices!");
     	}
 		return indices;
+	}
+	
+	public boolean checkForValidXML(String file) {
+		boolean Valid = false;
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(loadXMLFromString(file));
+			Element docEle = doc.getDocumentElement();
+			NodeList triList = docEle.getElementsByTagName("java class");
+			if (triList != null) {
+				Valid = true;
+			}
+		} catch (Exception e) {
+			Valid = false;
+    	}
+		return Valid;
 	}
  
 	public double[][] getTriangles(String file) {
